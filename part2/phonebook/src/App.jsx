@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import personService from "./services/Persons";
+import personService from "./services/persons";
 import "./index.css";
 
 const Notifications = ({ message, label }) => {
