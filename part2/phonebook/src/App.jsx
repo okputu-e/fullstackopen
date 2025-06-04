@@ -119,15 +119,24 @@ const App = () => {
 
     const newPerson = { name: newName, number: newNumber };
 
-    personService.create(newPerson).then((returnPerson) => {
-      setPersons((prevPersons) => prevPersons.concat(returnPerson));
-      setSuccessMessage(`Added ${newPerson.name}`);
-      setTimeout(() => {
-        setSuccessMessage(null);
-      }, 5000);
-      setNewName("");
-      setNewNumber("");
-    });
+    personService
+      .create(newPerson)
+      .then((returnPerson) => {
+        setPersons((prevPersons) => prevPersons.concat(returnPerson));
+        setSuccessMessage(`Added ${newPerson.name}`);
+        setTimeout(() => {
+          setSuccessMessage(null);
+        }, 5000);
+        setNewName("");
+        setNewNumber("");
+      })
+      .catch((error) => {
+        console.log(error.response.data.error);
+        setErrorMessage(error.response.data.error);
+        setTimeout(() => {
+          setErrorMessage(null);
+        }, 5000);
+      });
   };
 
   const deleteContact = (contact) => {
